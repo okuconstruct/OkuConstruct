@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OkuConstruct – Construim ce ai desenat</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e9e8e4;--ink:#10202e;--card:#f7f6f3;--mut:#55616c;--navy:#0d2b45;--acc:#ffc400;--line:#10202e22;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a141d;--ink:#eef1f3;--card:#122230;--mut:#9fb0bd;--line:#ffffff22}}
+:root[data-theme="dark"]{--bg:#0a141d;--ink:#eef1f3;--card:#122230;--mut:#9fb0bd;--line:#ffffff22}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "Public Sans",system-ui,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#0d2b45;z-index:60}
+h1,h2,h3{font-family:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;line-height:.95;margin:0;letter-spacing:.01em}
+img{max-width:100%;display:block}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:#0d2b45ee;backdrop-filter:blur(8px);color:#fff}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font:900 28px "Big Shoulders Display","Arial Narrow",sans-serif;letter-spacing:.03em;cursor:pointer;user-select:none;-webkit-user-select:none}
+.logo i{font-style:normal;color:var(--acc)}
+nav{display:flex;gap:22px}
+nav a{color:#dbe6ee;text-decoration:none;font-weight:500;font-size:15px;cursor:pointer}
+nav a:hover{color:var(--acc)}
+.burger{display:none;background:none;border:0;color:#fff;font-size:28px;padding:4px 8px}
+@media(max-width:760px){.burger{display:block}nav{position:absolute;top:64px;left:0;right:0;background:#0d2b45;flex-direction:column;gap:0;max-height:0;overflow:hidden;transition:max-height .3s}nav.open{max-height:420px}nav a{padding:16px 20px;border-top:1px solid #ffffff18}}
+.hero{background:#0d2b45;color:#fff;position:relative;overflow:hidden;background-size:cover;background-position:center}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(#ffffff12 1px,transparent 1px),linear-gradient(90deg,#ffffff12 1px,transparent 1px);background-size:40px 40px}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(90deg,#0d2b45f2 30%,#0d2b4566)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center;min-height:clamp(520px,86vh,820px);padding-top:30px;padding-bottom:30px}
+.hero h1{font-size:clamp(54px,9vw,128px);font-weight:900}
+.hero p{max-width:34ch;font-size:19px;color:#c9d8e4;margin:22px 0 28px}
+.btn{display:inline-block;background:var(--acc);color:#10202e;font-weight:700;padding:14px 26px;border:0;text-decoration:none;border-radius:2px;box-shadow:5px 5px 0 #ffffff33;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 #ffffff33}
+.facts{display:flex;gap:30px;margin-top:38px;flex-wrap:wrap}
+.facts div{border-left:3px solid var(--acc);padding-left:12px;font-size:14px;color:#b7c7d4}
+.facts b{display:block;font:900 34px "Big Shoulders Display",sans-serif;color:#fff;line-height:1}
+.plan{width:100%;height:auto;max-height:480px}
+.plan .d{fill:none;stroke:#fff;stroke-width:2;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.6s ease forwards;animation-delay:calc(var(--i)*.22s + .3s)}
+.plan .y{stroke:var(--acc)}
+.plan .fill{fill:#ffc40022;opacity:0;animation:fade 1s 3.2s forwards}
+.plan text{fill:var(--acc);font:700 13px "Public Sans",sans-serif;opacity:0;animation:fade .6s 3s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}@keyframes fade{to{opacity:1}}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr;min-height:0;padding-top:40px}.plan{max-height:300px}}
+.sec{padding:84px 0 20px}
+.head{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:34px}
+.head h2{font-size:clamp(38px,6vw,70px);font-weight:900;border-bottom:8px solid var(--acc);padding-bottom:6px;outline-offset:6px}
+.lead{font-size:clamp(18px,2.2vw,23px);max-width:62ch;margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+figure{margin:0;position:relative;overflow:hidden;background:var(--card);cursor:zoom-in}
+figure img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .5s}
+figure:hover img{transform:scale(1.06)}
+figcaption{padding:12px 14px;font-weight:500;border-top:4px solid var(--acc)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border:2px solid var(--ink)}
+.cards article{padding:26px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);margin:0 -2px -2px 0;position:relative;background:var(--card)}
+.cards h3{font-size:32px;font-weight:900;margin-bottom:10px}
+.cards p{margin:0;color:var(--mut)}
+.lead,.hero p,.cards p{white-space:pre-line}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:34px}
+.stat{position:relative;border-left:8px solid var(--acc);padding:2px 0 2px 18px}
+.sn{display:block;font:900 clamp(60px,9vw,108px)/.95 "Big Shoulders Display","Arial Narrow",sans-serif}
+.sl{display:block;color:var(--mut);max-width:20ch}
+.stat .fctl{top:0;right:0}
+.contact{background:#0d2b45;color:#fff;margin-top:84px;padding:70px 0}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+@media(max-width:760px){.contact .wrap{grid-template-columns:1fr}}
+.contact h2{font-size:clamp(40px,6vw,72px);font-weight:900;margin-bottom:20px}
+.contact p{margin:6px 0;color:#c9d8e4}
+.contact a{color:var(--acc)}
+form{display:grid;gap:12px}
+input,textarea,select{font:inherit;padding:13px;border:2px solid #ffffff44;background:#ffffff10;color:#fff;border-radius:2px;width:100%}
+input:focus,textarea:focus,select:focus,button:focus-visible,[contenteditable]:focus{outline:3px solid var(--acc);outline-offset:2px}
+footer{background:#08202f;color:#8fa6b6;text-align:center;padding:22px;font-size:14px}
+.rv{opacity:0;transform:translateY(24px);transition:.7s}.rv.in{opacity:1;transform:none}
+.adm-only{display:none!important}
+body.adm .adm-only{display:flex!important}
+body.adm [contenteditable]{outline:2px dashed var(--acc);outline-offset:3px;cursor:text}
+body.adm figure{cursor:default}
+.fctl{position:absolute;top:8px;right:8px;gap:6px}
+.fctl button,.sctl button{background:#10202e;color:#fff;border:2px solid var(--acc);padding:6px 11px;border-radius:2px}
+.sctl{gap:6px}
+.cards .fctl{top:6px}
+.add{min-height:150px;border:3px dashed var(--acc);background:transparent;color:var(--ink);font-weight:700;align-items:center;justify-content:center}
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:#10202e;color:#fff;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));gap:8px;flex-wrap:wrap;align-items:center;border-top:3px solid var(--acc)}
+#bar select{width:auto;background:#fff;color:#10202e;padding:8px}
+#bar button{background:var(--acc);color:#10202e;border:0;padding:9px 14px;font-weight:700;border-radius:2px}
+#bar button.g{background:#ffffff22;color:#fff}
+#bar b{margin-right:auto}
+body.adm{padding-bottom:110px}
+.ov{position:fixed;inset:0;background:#000c;z-index:90;display:none;align-items:center;justify-content:center;padding:20px}
+.ov.on{display:flex}
+.box{background:#0d2b45;color:#fff;padding:28px;width:min(380px,100%);border-top:6px solid var(--acc)}
+.box h3{font-size:34px;margin-bottom:14px}
+.shake{animation:sh .35s}@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+#lb{cursor:zoom-out}#lb img{max-height:88vh;max-width:100%;object-fit:contain}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--acc);color:#10202e;padding:10px 18px;font-weight:700;z-index:99;display:none}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="logo" id="logo"><span data-t="l1">Oku</span><i data-t="l2">Construct</i></div><button class="burger" id="bg" aria-label="Meniu">☰</button><nav id="nav"></nav></div></header>
+
+<section class="hero" id="hero">
+<div class="shade" id="shade" style="display:none"></div>
+<div class="wrap">
+<div>
+<h1 data-h="title">Construim ce ai desenat.</h1>
+<p data-h="sub">De la fundație până la cheie, lucrăm curat, la termen și fără surprize la deviz.</p>
+<a class="btn" data-go="contact"><span data-t="btn">Cere o ofertă gratuită</span></a>
+<div class="facts"><div><b class="num" data-t="f1n">15+</b><span data-t="f1l">ani pe șantier</span></div><div><b class="num" data-t="f2n">240+</b><span data-t="f2l">proiecte predate</span></div><div><b class="num" data-t="f3n">5</b><span data-t="f3l">ani garanție</span></div></div>
+</div>
+<svg class="plan" viewBox="0 0 400 340" aria-hidden="true">
+<path class="d y" pathLength="1" style="--i:0" d="M20 300H380"/>
+<path class="d" pathLength="1" style="--i:1" d="M60 300V160H340V300"/>
+<path class="d" pathLength="1" style="--i:2" d="M40 165L200 55L360 165"/>
+<path class="d" pathLength="1" style="--i:3" d="M170 300V215H230V300"/>
+<path class="d" pathLength="1" style="--i:4" d="M90 190H145V245H90Z"/>
+<path class="d" pathLength="1" style="--i:5" d="M255 190H310V245H255Z"/>
+<path class="d" pathLength="1" style="--i:6" d="M180 120H220V150H180Z"/>
+<path class="d y" pathLength="1" style="--i:7" d="M60 325H340M60 318V332M340 318V332"/>
+<path class="d y" pathLength="1" style="--i:8" d="M375 160V300M368 160H382M368 300H382"/>
+<path class="fill" d="M60 160H340V300H60Z"/>
+<text x="170" y="320">12,40 m</text><text x="300" y="235" transform="rotate(90 380 230)" display="none">h</text><text x="338" y="235" style="display:none"></text>
+</svg>
+</div></section>
+
+<main id="main"></main>
+
+<section class="contact" id="contact"><div class="wrap">
+<div><h2 class="rv" data-t="ch">Hai să-ți ridicăm proiectul.</h2>
+<p><span data-t="lp">Telefon:</span> <a data-c="phone" id="cp">0700 000 000</a></p>
+<p><span data-t="le">Email:</span> <a data-c="email" id="ce">contact@okuconstruct.ro</a></p>
+<p data-c="addr">Str. Constructorilor 18, România</p></div>
+<form id="cf"><input id="fn" placeholder="Nume" required><input id="ft" placeholder="Telefon" type="tel"><textarea id="fm" rows="4" placeholder="Spune-ne ce vrei să construim"></textarea><button class="btn" type="submit"><span data-t="sb">Trimite mesajul</span></button><a id="ml" style="display:none"></a></form>
+</div></section>
+<footer>© <span id="yr"></span> <span data-t="foot">OkuConstruct. Toate drepturile rezervate.</span></footer>
+
+<div class="ov" id="lg"><form class="box" id="lf"><h3>Acces administrator</h3><input type="password" id="pw" placeholder="Parola" autocomplete="current-password"><p id="pe" style="color:var(--acc);margin:8px 0;min-height:24px"></p><button class="btn" type="submit">Intră</button> <button type="button" class="btn" id="lc" style="background:#ffffff22;color:#fff;box-shadow:none">Anulează</button></form></div>
+<div class="ov" id="lb"><img alt=""></div>
+<div class="ov" id="sp"><div class="box" style="width:min(640px,100%);max-height:90vh;overflow:auto"><h3>Statistici vizitatori</h3><div id="sbody"></div><p><button class="btn" id="sx">Închide</button></p></div></div>
+<div id="bar" class="adm-only"><b>Mod administrator</b>
+<select id="st"><option value="gallery">Galerie foto</option><option value="stats">Statistici</option><option value="cards">Carduri</option><option value="text">Text</option></select>
+<button id="as">+ Secțiune</button><button id="xp">Exportă site-ul</button><button id="sb2" class="g">Statistici</button><button id="hb" class="g">Fundal hero</button><button id="rs" class="g">Resetează</button><button id="ex" class="g">Ieși</button></div>
+<input type="file" id="file" accept="image/*" multiple hidden>
+<div id="toast"></div>
+
+<script>
+const SRC0="<!DOCTYPE html>\n"+document.documentElement.outerHTML;const BAKED=/*BAKED*/null/*END*/;const K="okc_v2",PW="perca18@";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const uid=()=>Math.random().toString(36).slice(2,8);
+function ph(n){const P=[["#ffc400","#0d2b45"],["#7fb3d5","#13283a"],["#e07a5f","#2a2f3a"],["#9bc1a1","#17262b"],["#c9ada7","#22223b"],["#f2cc8f","#1d3040"]][n%6];let b="";for(let i=0;i<7;i++){const w=40+(n*37+i*53)%48,h=90+(n*61+i*47)%190,x=i*60+10;b+=`<rect x="${x}" y="${330-h}" width="${w}" height="${h}" fill="#0009"/>`;for(let y=14;y<h-16;y+=24)b+=`<rect x="${x+8}" y="${330-h+y}" width="9" height="11" fill="${P[0]}" opacity=".7"/>`}
+return"data:image/svg+xml;utf8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 330"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${P[0]}"/><stop offset="1" stop-color="${P[1]}"/></linearGradient></defs><rect width="440" height="330" fill="url(#g)"/>${b}</svg>`)}
+const src=v=>String(v).startsWith("ph:")?ph(+v.slice(3)):v;
+const defaults=()=>({txt:{},hero:{title:"Construim ce ai desenat.",sub:"De la fundație până la cheie, lucrăm curat, la termen și fără surprize la deviz.",bg:""},contact:{phone:"0700 000 000",email:"contact@okuconstruct.ro",addr:"Str. Constructorilor 18, România"},
+sections:[
+{id:"srv",type:"cards",title:"Ce construim",items:[{id:uid(),t:"Case la cheie",d:"Fundație, structură, instalații și finisaje, într-un singur contract."},{id:uid(),t:"Renovări",d:"Apartamente și case vechi aduse la standarde noi, fără praf în toată casa."},{id:uid(),t:"Fațade și acoperișuri",d:"Termoizolație, tâmplărie și învelitori montate pentru decenii."},{id:uid(),t:"Hale și spații comerciale",d:"Structuri metalice și birouri predate la termen."}]},
+{id:"prj",type:"gallery",title:"Lucrări recente",items:["Vilă Snagov","Bloc P+4 Cluj","Hală logistică Ploiești","Renovare Brașov","Fațadă ventilată","Casă pasivă Sibiu"].map((c,i)=>({id:uid(),img:"ph:"+i,cap:c}))},
+{id:"abt",type:"text",title:"Despre noi",text:"OkuConstruct este o echipă de constructori care crede că o lucrare bună se vede în detalii: colțuri drepte, șanțuri curate și un șantier pe care îl poți vizita oricând. Îți dăm un deviz clar, un grafic de lucrări și un om de contact care răspunde la telefon."}]});
+let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+if(!S||!S.sections)S=BAKED&&BAKED.sections?JSON.parse(JSON.stringify(BAKED)):defaults();S.txt=S.txt||{};
+let adm=false;try{adm=sessionStorage.getItem("okc_a")==="1"}catch(e){}
+function toast(t){const e=$("#toast");e.textContent=t;e.style.display="block";clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display="none",2600)}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){toast("Memorie plină: șterge câteva poze vechi.")}}
+function secHTML(s){
+const ctl=`<div class="sctl adm-only"><button data-act="up">↑</button><button data-act="down">↓</button><button data-act="del-sec">Șterge secțiunea</button></div>`;let b="";
+if(s.type==="text")b=`<p class="lead" data-e="text">${esc(s.text)}</p>`;
+if(s.type==="gallery")b=`<div class="grid">${s.items.map(it=>`<figure data-iid="${it.id}"><img loading="lazy" src="${src(it.img)}" alt="${esc(it.cap)}"><figcaption data-e="cap">${esc(it.cap)}</figcaption><div class="fctl adm-only"><button data-act="rep">Schimbă poza</button><button data-act="del-item">×</button></div></figure>`).join("")}<button class="add adm-only" data-act="add-photo">+ Adaugă poze noi</button></div>`;
+if(s.type==="cards")b=`<div class="cards">${s.items.map(it=>`<article data-iid="${it.id}"><h3 data-e="t">${esc(it.t)}</h3><p data-e="d">${esc(it.d)}</p><div class="fctl adm-only"><button data-act="del-item">×</button></div></article>`).join("")}<button class="add adm-only" data-act="add-card">+ Card nou</button></div>`;
+if(s.type==="stats")b=`<div class="stats">${s.items.map(it=>`<div class="stat" data-iid="${it.id}"><b class="sn" data-e="n">${esc(it.n)}</b><span class="sl" data-e="l">${esc(it.l)}</span><div class="fctl adm-only"><button data-act="del-item">×</button></div></div>`).join("")}<button class="add adm-only" data-act="add-stat">+ Statistică</button></div>`;
+return`<section class="sec" id="s-${s.id}" data-sid="${s.id}"><div class="wrap rv"><div class="head"><h2 data-e="title">${esc(s.title)}</h2>${ctl}</div>${b}</div></section>`}
+function render(){
+$("#main").innerHTML=S.sections.map(secHTML).join("");
+$("#nav").innerHTML=S.sections.map(s=>`<a data-go="s-${s.id}">${esc(s.title)}</a>`).join("")+`<a data-go="contact">Contact</a>`;
+const h=S.hero;$("[data-h=title]").textContent=h.title;$("[data-h=sub]").textContent=h.sub;
+const hs=$("#hero");hs.style.backgroundImage=h.bg?`url(${h.bg})`:"";$("#shade").style.display=h.bg?"block":"none";
+$$("[data-c]").forEach(e=>e.textContent=S.contact[e.dataset.c]);
+$$("[data-t]").forEach(e=>{if(S.txt[e.dataset.t]!=null)e.textContent=S.txt[e.dataset.t]});
+document.body.classList.toggle("adm",adm);
+$$("[data-e],[data-h],[data-c],[data-t]").forEach(e=>{if(adm)e.setAttribute("contenteditable","true");else e.removeAttribute("contenteditable")});
+
+
+watch()}
+let io;function watch(){io&&io.disconnect();io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");e.target.querySelectorAll(".sn").forEach(animNum);const sc=e.target.closest("[data-sid]");if(sc)hit("sec",sc.dataset.sid);io.unobserve(e.target)}}),{threshold:.1});$$(".rv").forEach(e=>io.observe(e))}
+function animNum(e){if(adm)return;const full=e.textContent,m=full.match(/^(\d+)(.*)$/);if(!m)return;const n=+m[1],t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1600);e.textContent=p>=1?full:Math.round(n*(1-Math.pow(1-p,3)))+m[2];if(p<1)requestAnimationFrame(f)})(t0)}
+function count(){$$(".num").forEach(animNum)}
+document.addEventListener("focusout",e=>{const el=e.target;if(!adm||!el.dataset)return;
+if(el.dataset.h){S.hero[el.dataset.h]=el.innerText.trim()}
+else if(el.dataset.c){S.contact[el.dataset.c]=el.innerText.trim()}
+else if(el.dataset.t){S.txt[el.dataset.t]=el.innerText.trim()}
+else if(el.dataset.e){const s=S.sections.find(x=>x.id===el.closest("[data-sid]").dataset.sid),it=el.closest("[data-iid]");
+if(it){const o=s.items.find(x=>x.id===it.dataset.iid);o[el.dataset.e]=el.innerText.trim()}else s[el.dataset.e]=el.innerText.trim()}
+save()});
+document.addEventListener("paste",e=>{if(adm&&e.target.isContentEditable){e.preventDefault();document.execCommand("insertText",false,(e.clipboardData||window.clipboardData).getData("text/plain"))}});
+document.addEventListener("keydown",e=>{const d=e.target.dataset||{};if(e.key==="Enter"&&adm&&(d.t||d.c||d.h==="title"||["title","cap","t","n","l"].includes(d.e))){e.preventDefault();e.target.blur()}});
+let pend=null,armed=null;
+function resize(f){return new Promise(r=>{const fr=new FileReader;fr.onload=()=>{const im=new Image;im.onload=()=>{const m=1100,k=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);r(c.toDataURL("image/jpeg",.72))};im.src=fr.result};fr.readAsDataURL(f)})}
+$("#file").onchange=async e=>{const fs=[...e.target.files];e.target.value="";if(!fs.length||!pend)return;toast("Se încarcă pozele…");const imgs=[];for(const f of fs)imgs.push(await resize(f));
+const p=pend;if(p.m==="hero")S.hero.bg=imgs[0];else{const s=S.sections.find(x=>x.id===p.sid);
+if(p.m==="add")imgs.forEach(i=>s.items.push({id:uid(),img:i,cap:"Proiect nou"}));else s.items.find(x=>x.id===p.iid).img=imgs[0]}
+save();render();toast("Salvat")};
+const pick=p=>{pend=p;$("#file").multiple=p.m==="add";$("#file").click()};
+document.addEventListener("click",e=>{
+const go=e.target.closest("[data-go]");if(go){if(adm&&e.target.closest("[contenteditable]"))return;if(!adm&&go.dataset.go==="contact")hit("cta");const t=document.getElementById(go.dataset.go);t&&t.scrollIntoView();$("#nav").classList.remove("open");return}
+const a=e.target.closest("[data-act]");
+if(a){const sec=a.closest("[data-sid]"),sid=sec&&sec.dataset.sid,it=a.closest("[data-iid]"),iid=it&&it.dataset.iid,act=a.dataset.act,i=S.sections.findIndex(x=>x.id===sid);
+if(act==="add-photo")return pick({m:"add",sid});if(act==="rep")return pick({m:"rep",sid,iid});
+if(act==="add-card"){S.sections[i].items.push({id:uid(),t:"Serviciu nou",d:"Descrie aici serviciul."})}
+if(act==="add-stat"){S.sections[i].items.push({id:uid(),n:"100+",l:"descrierea statisticii"})}
+if(act==="up"&&i>0)[S.sections[i-1],S.sections[i]]=[S.sections[i],S.sections[i-1]];
+if(act==="down"&&i<S.sections.length-1)[S.sections[i+1],S.sections[i]]=[S.sections[i],S.sections[i+1]];
+if(act==="del-item"||act==="del-sec"){const k=act+iid+sid;if(armed!==k){armed=k;a.textContent="Sigur?";setTimeout(()=>{armed=null},3000);return}armed=null;
+if(act==="del-item")S.sections[i].items=S.sections[i].items.filter(x=>x.id!==iid);else S.sections.splice(i,1)}
+save();render();return}
+const f=e.target.closest("figure");if(f&&!adm){hit("lightbox");const im=f.querySelector("img");$("#lb img").src=im.src;$("#lb").classList.add("on")}});
+$("#lb").onclick=()=>$("#lb").classList.remove("on");
+$("#bg").onclick=()=>$("#nav").classList.toggle("open");
+$("#as").onclick=()=>{const t=$("#st").value;S.sections.push({id:uid(),type:t,title:"Secțiune nouă",text:"Scrie aici textul secțiunii.",items:t==="cards"?[{id:uid(),t:"Titlu card",d:"Descriere."}]:t==="stats"?[{id:uid(),n:"100+",l:"clienți mulțumiți"},{id:uid(),n:"12",l:"echipe pe teren"},{id:uid(),n:"98%",l:"lucrări predate la termen"}]:[]});save();render();document.getElementById("s-"+S.sections.at(-1).id).scrollIntoView();toast("Secțiune adăugată. Atinge titlul ca să-l modifici.")};
+$("#hb").onclick=()=>pick({m:"hero"});
+$("#rs").onclick=function(){if(armed!=="rs"){armed="rs";this.textContent="Sigur? Se șterge tot";setTimeout(()=>{armed=null;this.textContent="Resetează"},3000);return}armed=null;S=BAKED&&BAKED.sections?JSON.parse(JSON.stringify(BAKED)):defaults();S.txt=S.txt||{};save();render();this.textContent="Resetează"};
+$("#ex").onclick=()=>{adm=false;try{sessionStorage.removeItem("okc_a")}catch(e){}render();toast("Ai ieșit din modul administrator")};
+let taps=0,tt;$("#logo").onclick=()=>{if(adm)return;taps++;clearTimeout(tt);tt=setTimeout(()=>taps=0,2500);if(taps>=5){taps=0;openLogin()}else if(taps===1)window.scrollTo(0,0)};
+function openLogin(){$("#lg").classList.add("on");$("#pe").textContent="";$("#pw").value="";setTimeout(()=>$("#pw").focus(),50)}
+$("#lc").onclick=()=>{$("#lg").classList.remove("on");if(location.hash==="#admin")location.hash=""};
+$("#lf").onsubmit=e=>{e.preventDefault();if($("#pw").value===PW){adm=true;try{sessionStorage.setItem("okc_a","1")}catch(x){}$("#lg").classList.remove("on");render();toast("Bun venit, administrator")}else{$("#pe").textContent="Parolă greșită.";const b=$(".box");b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake")}};
+function hashCheck(){if(location.hash==="#admin"&&!adm)openLogin()}
+addEventListener("hashchange",hashCheck);
+$("#cf").onsubmit=e=>{e.preventDefault();if(adm)return;hit("form");const l=$("#ml");l.href=`mailto:${S.contact.email}?subject=${encodeURIComponent("Ofertă – "+$("#fn").value)}&body=${encodeURIComponent($("#fm").value+"\n\nTelefon: "+$("#ft").value)}`;l.click()};
+$("#yr").textContent=new Date().getFullYear();
+const SK="okc_stats";let ST;try{ST=JSON.parse(localStorage.getItem(SK))}catch(e){}
+ST=ST||{};ST.v=ST.v||0;ST.days=ST.days||{};ST.sec=ST.sec||{};ST.ev=ST.ev||{};
+const today=()=>new Date().toISOString().slice(0,10);
+function sv(){try{localStorage.setItem(SK,JSON.stringify(ST))}catch(e){}}
+function hit(k,id){if(adm)return;if(k==="sec")ST.sec[id]=(ST.sec[id]||0)+1;else ST.ev[k]=(ST.ev[k]||0)+1;sv()}
+try{if(!adm&&!sessionStorage.getItem("okc_s")){sessionStorage.setItem("okc_s","1");ST.v++;ST.days[today()]=(ST.days[today()]||0)+1;ST.last=Date.now();sv()}}catch(e){}
+const bars=(a,m)=>a.map(([l,n])=>`<div style="display:flex;align-items:center;gap:10px;margin:6px 0;font-size:14px"><span style="width:110px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(l)}</span><span style="height:14px;background:var(--acc);width:${Math.round(n/m*100)}%;min-width:2px"></span><b>${n}</b></div>`).join("");
+function showStats(){
+const photos=S.sections.reduce((a,s)=>a+(s.type==="gallery"?s.items.length:0),0);
+const days=[...Array(7)].map((_,i)=>{const d=new Date(Date.now()-(6-i)*864e5).toISOString().slice(0,10);return[d.slice(8)+"."+d.slice(5,7),ST.days[d]||0]});
+const secs=S.sections.map(s=>[s.title,ST.sec[s.id]||0]);
+const tile=(n,l)=>`<div class="stat" style="padding-left:12px;border-width:5px"><b class="sn" style="font-size:46px">${n}</b><span class="sl">${l}</span></div>`;
+$("#sbody").innerHTML=`<div class="stats" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;margin:10px 0 22px">${tile(ST.v,"vizite")}${tile(ST.ev.cta||0,"click-uri spre contact")}${tile(ST.ev.form||0,"mesaje trimise")}${tile(ST.ev.lightbox||0,"poze deschise")}${tile(photos,"poze în galerii")}${tile(S.sections.length,"secțiuni")}</div><h4>Vizite pe zile, ultimele 7 zile</h4>${bars(days,Math.max(1,...days.map(d=>d[1])))}<h4>Secțiuni văzute</h4>${bars(secs,Math.max(1,...secs.map(d=>d[1])))}<p style="font-size:14px;color:#9fb0bd">Ultima vizită: ${ST.last?new Date(ST.last).toLocaleString("ro-RO"):"încă nu"}. Se numără doar vizitele din acest browser, fără cele făcute de tine ca administrator.</p><button class="btn" id="srs" style="background:#ffffff22;color:#fff;box-shadow:none">Resetează statisticile</button>`;
+$("#srs").onclick=()=>{ST={v:0,days:{},sec:{},ev:{}};sv();showStats()};
+$("#sp").classList.add("on")}
+$("#sb2").onclick=showStats;
+$("#xp").onclick=()=>{try{const html=SRC0.replace(/\/\*BAKED\*\/.*?\/\*END\*\//,()=>"/*BAKED*/"+JSON.stringify(S).replace(/</g,"\\u003c")+"/*END*/");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([html],{type:"text/html"}));a.download="index.html";document.body.appendChild(a);a.click();a.remove();toast("Descărcat: index.html. Încarc-o pe GitHub peste fișierul vechi.")}catch(e){toast("Exportul nu a mers aici. Încearcă pe site-ul publicat.")}};$("#sx").onclick=()=>$("#sp").classList.remove("on");
+render();count();hashCheck();
+</script>
+</body>
+</html>
